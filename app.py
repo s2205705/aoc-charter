@@ -37,7 +37,7 @@ def index():
         
         return redirect(url_for('index'))
     
-    return render_template('index.html')
+    return ('index.html')
 
 # Route to display only college names
 @app.route('/colleges')
@@ -46,19 +46,19 @@ def colleges():
         cursor = conn.cursor()
         cursor.execute('SELECT college_name FROM signed_colleges')
         colleges = cursor.fetchall()  # Fetch all college names as a list of tuples
-    return render_template('signed_colleges.html', colleges=[c[0] for c in colleges])  # Pass names to template
+    return ('signed_colleges.html', colleges=[c[0] for c in colleges])  # Pass names to template
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    return ('contact.html')
 
 @app.route('/charter')
 def charter():
-    return render_template('charter.html')
+    return ('charter.html')
 
 @app.route('/files/<filename>')
 def files(filename):
-    return send_from_directory('static/files', filename)
+    return send_from_directory('files', filename)
 
 if __name__ == '__main__':
     # Initialize the database when the app starts
